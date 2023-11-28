@@ -24,6 +24,7 @@ const Button = () => {
           </div>
         );
       })}
+      <h1>さだ</h1>
       <button className="px-2 py-1 m-0.5 h-16 w-16 text-yellow-500 border border-yellow-500 font-semibold rounded-full hover:bg-yellow-100">=</button>
     </div>
   );
