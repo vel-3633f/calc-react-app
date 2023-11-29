@@ -40,7 +40,7 @@ const Button = ({ ans, setAns }) => {
                   className={`${buttonStyle} ${
                     index2 === 3
                       ? "bg-yellow-500 hover:bg-yellow-400"
-                      : "bg-gray-600 hover:bg-gray-400"
+                      : "bg-gray-700 hover:bg-gray-400"
                   }`}
                   onClick={() => handleButtonClick(item)}
                   disabled={index2 === 3 ? !isCheck : false}
@@ -53,7 +53,7 @@ const Button = ({ ans, setAns }) => {
         );
       })}
       <button
-        className={`${buttonStyle} bg-gray-600 hover:bg-gray-400"`}
+        className={`${buttonStyle} bg-gray-700 hover:bg-gray-400`}
         onClick={() => handleButtonClick("=")}
       >
         =
