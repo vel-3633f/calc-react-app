@@ -5,42 +5,27 @@ const btnItem = [
   [7, 8, 9, "÷"],
   [4, 5, 6, "*"],
   [1, 2, 3, "-"],
-  [0, "AC", ".", "+"],
+  [0, ".", "AC", "+"],
 ];
 const buttonStyle =
-  "px-2 py-1 m-0.5 h-16 w-16 text-white bg-gray-600 font-semibold rounded-full hover:bg-gray-400 disabled:bg-gray-300";
+  "px-2 py-1 m-0.5 h-16 w-16 text-white font-semibold rounded-full disabled:bg-yellow-200 text-2xl";
 
 const Button = ({ ans, setAns }) => {
   const [isCheck, setIsCheck] = useState(false);
 
-  const addAns = (e) => {
-    const newValue = e.target.textContent;
-    switch (newValue) {
+  const handleButtonClick = (value) => {
+    switch (value) {
       case "AC":
         setAns("");
-        break;
-      case "+":
-        setAns(ans + newValue);
-        setIsCheck(false);
-        break;
-      case "-":
-        setAns(ans + newValue);
-        setIsCheck(false);
-        break;
-      case "*":
-        setAns(ans + newValue);
-        setIsCheck(false);
-        break;
-      case "÷":
-        setAns(ans + newValue);
-        setIsCheck(false);
         break;
       case "=":
         setAns(calcFunc(ans));
         break;
       default:
-        setAns(ans + newValue);
-        setIsCheck(true);
+        setAns(ans + value);
+        setIsCheck(
+          value !== "+" && value !== "-" && value !== "*" && value !== "÷"
+        );
     }
   };
   return (
@@ -52,8 +37,12 @@ const Button = ({ ans, setAns }) => {
               return (
                 <button
                   key={index2}
-                  className={buttonStyle}
-                  onClick={addAns}
+                  className={`${buttonStyle} ${
+                    index2 === 3
+                      ? "bg-yellow-500 hover:bg-yellow-400"
+                      : "bg-gray-600 hover:bg-gray-400"
+                  }`}
+                  onClick={() => handleButtonClick(item)}
                   disabled={index2 === 3 ? !isCheck : false}
                 >
                   {item}
@@ -63,7 +52,10 @@ const Button = ({ ans, setAns }) => {
           </div>
         );
       })}
-      <button className={buttonStyle} onClick={addAns}>
+      <button
+        className={`${buttonStyle} bg-gray-600 hover:bg-gray-400"`}
+        onClick={() => handleButtonClick("=")}
+      >
         =
       </button>
     </div>
