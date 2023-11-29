@@ -1,26 +1,54 @@
+const operators = {
+  "+": (a, b) => a + b,
+  "-": (a, b) => a - b,
+  "*": (a, b) => a * b,
+  "÷": (a, b) => a / b,
+};
+
 export const calcFunc = (ans) => {
   let ansAry = [];
   let beforeNum = "";
+
   for (let i = 0; i < ans.length; i++) {
-    if (ans[i] === "+") {
+    if (ans[i] in operators) {
       ansAry.push(beforeNum);
-      ansAry.push("+");
+      ansAry.push(ans[i]);
       beforeNum = "";
     } else {
       beforeNum += ans[i];
     }
-    // while (ansAry.length === 1) {
   }
   ansAry.push(beforeNum);
-  console.log(ansAry);
 
-  let sum = 0;
-  while (ansAry.indexOf("+") !== -1) {
-    let plusIndex = ansAry.indexOf("+");
-    sum = Number(ansAry[plusIndex - 1]) + Number(ansAry[plusIndex + 1]);
-    ansAry.splice(plusIndex - 1, 3, sum);
+  const calcDevide = (operator1, operator2) => {
+    while (ansAry.includes(operator1) || ansAry.includes(operator2)) {
+      for (let i = 0; i < ansAry.length; i++) {
+        if (ansAry[i] === operator1) {
+          const calcResult = operators[operator1](
+            Number(ansAry[i - 1]),
+            Number(ansAry[i + 1])
+          );
+          ansAry.splice(i - 1, 3, calcResult);
+          break;
+        }
+        if (ansAry[i] === operator2) {
+          const calcResult = operators[operator2](
+            Number(ansAry[i - 1]),
+            Number(ansAry[i + 1])
+          );
+          ansAry.splice(i - 1, 3, calcResult);
+          break;
+        }
+      }
+    }
+  };
+
+  calcDevide("*", "÷");
+  calcDevide("+", "-");
+
+  if (ansAry.includes(Infinity) || ansAry.includes(NaN)) {
+    ansAry = ["エラー"];
   }
-
   console.log(ansAry);
-  return sum;
+  return ansAry;
 };
