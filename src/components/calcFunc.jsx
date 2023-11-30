@@ -5,7 +5,7 @@ const operators = {
   "÷": (a, b) => a / b,
 };
 
-export const calcFunc = (ans) => {
+export const calcFunc = (ans,setBeforeFormula) => {
   let ansAry = [];
   let beforeNum = "";
 
@@ -19,6 +19,7 @@ export const calcFunc = (ans) => {
     }
   }
   ansAry.push(beforeNum);
+  setBeforeFormula(`${ansAry.join("")}=`)
 
   const calcDevide = (operator1, operator2) => {
     while (ansAry.includes(operator1) || ansAry.includes(operator2)) {
@@ -47,8 +48,10 @@ export const calcFunc = (ans) => {
   calcDevide("+", "-");
 
   if (ansAry.includes(Infinity) || ansAry.includes(NaN)) {
-    ansAry = ["エラー"];
+    ans = "エラー";
+  } else {
+    ans = String(ansAry[0]);
   }
   console.log(ansAry);
-  return ansAry;
+  return ans;
 };
