@@ -1,11 +1,13 @@
 const operators = {
-  "+": (a, b) => a + b,
-  "-": (a, b) => a - b,
-  "*": (a, b) => a * b,
-  "÷": (a, b) => a / b,
+  "+": (a, b) => bigDecimal.add(a, b),
+  "-": (a, b) => bigDecimal.subtract(a, b),
+  "*": (a, b) => bigDecimal.multiply(a, b),
+  "÷": (a, b) => bigDecimal.divide(a, b),
 };
 
-export const calcFunc = (ans,setBeforeFormula) => {
+import bigDecimal from 'js-big-decimal'
+
+export const calcFunc = (ans, setBeforeFormula) => {
   let ansAry = [];
   let beforeNum = "";
 
@@ -19,7 +21,7 @@ export const calcFunc = (ans,setBeforeFormula) => {
     }
   }
   ansAry.push(beforeNum);
-  setBeforeFormula(`${ansAry.join("")}=`)
+  setBeforeFormula(`${ansAry.join("")}=`);
 
   const calcDevide = (operator1, operator2) => {
     while (ansAry.includes(operator1) || ansAry.includes(operator2)) {
@@ -52,6 +54,7 @@ export const calcFunc = (ans,setBeforeFormula) => {
   } else {
     ans = String(ansAry[0]);
   }
-  console.log(ansAry);
+  // console.log(ansAry);
+  // console.log(bigDecimal.add('12', '45'));
   return ans;
 };
