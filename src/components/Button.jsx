@@ -14,7 +14,7 @@ const Button = ({ ans, setAns, setBeforeFormula }) => {
   const [isCheck, setIsCheck] = useState(false);
 
   const handleButtonClick = (value) => {
-    console.log(ans);
+    // console.log(ans);
 
     switch (value) {
       case "AC":
